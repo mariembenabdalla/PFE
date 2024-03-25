@@ -10,7 +10,7 @@ app.use("/api/v1/auth", user);
 const app = express();
 app.use(express.json({ limit: "500mb" }));
 app.use(express.urlencoded({ limit: "500mb", extended: true }));
-
+console.log("test");
 // app.use(cors({ origin: "*" }));
 app.use(
   cors({
