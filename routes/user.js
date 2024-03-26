@@ -29,23 +29,48 @@ const upload = multer({ storage: storage });
 
 router.post("/register", async (req, res) => {
   try {
-    const { userName, email, password } = req.body;
-    bcrypt.hash(password, 12, async (err, hash) => {
-      if (err) {
-        res.status(500).json({ status: false, message: err });
-      } else if (hash) {
-        const user = await User.create({
-          userName,
-          email,
-          password: hash,
-        });
-        res.status(201).json({
-          status: true,
-          message: "user created",
-          data: user,
-        });
-      }
-    });
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      city,
+      town,
+      diplome,
+      cin,
+      phoneNumber,
+      address,
+      role,
+    } = req.body;
+    const findUser = await User.findOne({ email });
+    if (findUser) {
+      res.status(409).json({ status: false, message: "Email already Exist !" });
+    } else {
+      bcrypt.hash(password, 12, async (err, hash) => {
+        if (err) {
+          res.status(500).json({ status: false, message: err });
+        } else if (hash) {
+          const user = await User.create({
+            firstName,
+            lastName,
+            email,
+            password: hash,
+            city,
+            town,
+            diplome,
+            cin,
+            phoneNumber,
+            address,
+            role,
+          });
+          res.status(201).json({
+            status: true,
+            message: `${role} created successfully`,
+            data: user,
+          });
+        }
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json({ status: false, message: err });
@@ -56,34 +81,43 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const findUser = await User.findOne({ email: email });
+
     if (findUser) {
-      bcrypt.compare(password, findUser.password).then(function (result) {
-        if (result == true) {
-          jwt.sign(
-            {
-              username: findUser.username,
-              email: findUser.email,
-              role: findUser.role,
-              _id: findUser._id,
-            },
-            process.env.SECRETKEY,
-            {
-              expiresIn: "7d",
-            },
-            (err, token) => {
-              if (err) {
-                console.log(err);
-              } else if (token) {
-                res
-                  .status(200)
-                  .json({ message: "Logged Successfully", data: token });
+      if (findUser.authorized) {
+        bcrypt.compare(password, findUser.password).then(function (result) {
+          if (result == true) {
+            jwt.sign(
+              {
+                username: findUser.username,
+                email: findUser.email,
+                role: findUser.role,
+                _id: findUser._id,
+              },
+              process.env.SECRETKEY,
+              {
+                expiresIn: "7d",
+              },
+              (err, token) => {
+                if (err) {
+                  console.log(err);
+                } else if (token) {
+                  res
+                    .status(200)
+                    .json({ message: "Logged Successfully", data: token });
+                }
               }
-            }
-          );
-        } else {
-          res.status(404).json({ message: "password wrong ! " });
-        }
-      });
+            );
+          } else {
+            res.status(404).json({ message: "password wrong ! " });
+          }
+        });
+      } else {
+        res
+          .status(401)
+          .json({
+            message: "Your not Authorized To Sign in Please Contact Support",
+          });
+      }
     } else {
       res.status(404).json({ message: "Email not Found ! " });
     }
