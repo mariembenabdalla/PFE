@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+//permet de charger des variables d'environnement à partir d'un fichier .env
 const mongoURI = process.env.MONGO_URI;
 
 const connect = () => {

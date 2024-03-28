@@ -12,6 +12,7 @@ const handMadeSchema = new mongoose.Schema({
 
   project: [
     {
+      _id: mongoose.Schema.Types.ObjectId,
       name: { type: String },
       description: { type: String },
       images: [
@@ -23,5 +24,4 @@ const handMadeSchema = new mongoose.Schema({
     },
   ],
 });
-
 module.exports = mongoose.model("handMadeDetails", handMadeSchema);
