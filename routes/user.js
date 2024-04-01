@@ -9,26 +9,35 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const nodemailer = require("nodemailer");
+const handMadeDetails = require("../models/handMadeDetails");
 
+// Part Added With Me
 cloudinary.config({
-  cloud_name: "",
-  api_key: "",
-  api_secret: "",
+  cloud_name: "dbcl83rht",
+  api_key: "672932442358513",
+  api_secret: "-6KmhsPIWFM6AqcW0ozV5pOnE0w",
 });
 // Multer configuration for file upload
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "/", // Specify the folder name in your Cloudinary account
-    allowed_formats: ["jpg", "png", "gif", "webp"], // Specify the allowed image formats
+    allowed_formats: ["jpg", "png", "gif", "webp", "mp4"], // Specify the allowed image formats
     public_id: (req, file) => Math.random(), // Generate a unique public ID for each uploaded file
   },
 });
 
 const upload = multer({ storage: storage });
 
-router.post("/register", async (req, res) => {
+router.post("/register", upload.single("image"), async (req, res) => {
   try {
+    const image = req.file;
+    if (!image) {
+      res.status(401).json({
+        message:
+          "your are not authorized to register without submit your Diploma",
+      });
+    }
     const {
       firstName,
       lastName,
@@ -41,6 +50,7 @@ router.post("/register", async (req, res) => {
       phoneNumber,
       address,
       role,
+      job,
     } = req.body;
     const findUser = await User.findOne({ email });
     if (findUser) {
@@ -57,12 +67,19 @@ router.post("/register", async (req, res) => {
             password: hash,
             city,
             town,
-            diplome,
+            diplome: req.file.path,
             cin,
             phoneNumber,
             address,
             role,
           });
+          if (role == "handMade") {
+            const newHandMadeDetails = await handMadeDetails.create({
+              user: user._id,
+              jobName: job,
+              project: [],
+            });
+          }
           res.status(201).json({
             status: true,
             message: `${role} created successfully`,
@@ -112,11 +129,9 @@ router.post("/login", async (req, res) => {
           }
         });
       } else {
-        res
-          .status(401)
-          .json({
-            message: "Your not Authorized To Sign in Please Contact Support",
-          });
+        res.status(401).json({
+          message: "Your not Authorized To Sign in Please Contact Support",
+        });
       }
     } else {
       res.status(404).json({ message: "Email not Found ! " });
@@ -131,6 +146,42 @@ router.get("/current", isAuth, (req, res) => {
     res.send({ status: true, msg: "authorized", user: req.user });
   } else {
     res.send({ status: false, msg: "unauthorised" });
+  }
+});
+
+//part added by me
+// Change Password
+router.put("/change-password", isAuth, async (req, res) => {
+  try {
+    // Find the user by email
+    const user = await User.findOne({ _id: req.user._id });
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the provided old password matches the stored password
+    const validPassword = await bcrypt.compare(
+      req.body.oldPassword,
+      user.password
+    );
+    if (!validPassword) {
+      return res.status(401).json({ message: "Invalid old password" });
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(req.body.newPassword, 10);
+
+    // Update user's password with the new hashed password
+    user.password = hashedNewPassword;
+
+    // Save the updated user to the database
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
