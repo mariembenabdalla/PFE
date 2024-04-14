@@ -8,6 +8,10 @@ import { PublicRoute } from "./utils/PublicRoute";
 import { useSelector } from "react-redux";
 import Signup from "./Pages/SignUp/Signup";
 
+import Home from "./Pages/Home/Home";
+import About from "./Pages/About/About";
+import Footer from "./layouts/Footer/Footer";
+
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
 
@@ -23,10 +27,35 @@ function App() {
           }
         />
         <Route
+          path="/Home"
+          element={
+            <PublicRoute user={user}>
+              <Home />
+            </PublicRoute>
+          }
+        />
+
+        <Route
           path="/signup"
           element={
             <PublicRoute user={user}>
               <Signup />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/About"
+          element={
+            <PublicRoute user={user}>
+              <About />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/footer"
+          element={
+            <PublicRoute user={user}>
+              <Footer />
             </PublicRoute>
           }
         />

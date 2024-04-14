@@ -7,21 +7,18 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  overflow: hidden;
-}
+
 .wrapper-singup {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 110vh;
-  background: rgba(39, 39, 39, 0.4);
-  background-image: url(https://th.bing.com/th/id/R.bd63bcdcb24114608da9e102cdb002ee?rik=j%2f%2fDgRGyBnnjHw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f8%2fb%2fa%2f410223.jpg&ehk=wAlTSuHtyJCTWMLahEkdl4tAv18rg4uVtKf4Sesd%2bjk%3d&risl=&pid=ImgRaw&r=0);
+  min-height: 100vh; /* Réduction de la hauteur pour s'adapter à l'écran */
+  /* background-color: rgba(120, 122, 126, 0.63); */
+  /* background-image: url(https://www.shutterstock.com/image-illustration/abstract-noise-dotwork-pattern-gradient-600nw-2268767837.jpg); */
+
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .btn:hover {
@@ -30,9 +27,7 @@ body {
 #registerBtn {
   margin-left: 15px;
 }
-.btn.white-btn {
-  background: rgba(255, 255, 255, 0.7);
-}
+
 .btn.btn.white-btn:hover {
   background: rgba(255, 255, 255, 0.5);
 }
@@ -46,22 +41,30 @@ body {
   justify-content: center;
   width: 512px;
   height: 420px;
-  overflow: hidden;
   z-index: 2;
 }
 
 .signUp-container {
+  /* height: 808px; */
   border-radius: 2%;
-  background-color: rgba(36, 36, 41, 0.279);
+  /* background-color: rgba(36, 36, 41, 0.279); */
   /* position: absolute; */
   right: -520px;
-  width: 500px;
+  width: 602px;
   display: flex;
   flex-direction: column;
   transition: 0.5s ease-in-out;
+  padding: 1px;
+  margin: 64px 0px;
 }
+/* .wrapper-singup .signUp-container .two-forms .input-box .icon-green {
+  color: #92d35e;
+} */
+/* .wrapper-singup .signUp-container .input-box .icon-green {
+  color: #92d35e;
+} */
 .top span {
-  color: #fff;
+  color: #92d35e;
   font-size: small;
   padding: 10px 0;
   display: flex;
@@ -69,23 +72,23 @@ body {
 }
 .top span a {
   font-weight: 500;
-  color: #fff;
+  color: #9d9d9d;
   margin-left: 5px;
 }
 header {
-  color: #fff;
+  color: #9d9d9d;
   font-size: 30px;
   text-align: center;
   padding: 10px 0 30px 0;
 }
 .two-forms {
   display: flex;
-  gap: 10px;
+  gap: 87px;
 }
 .input-field {
   font-size: 15px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: rgb(91 83 83 / 54%);
+  color: #161515;
   height: 50px;
   width: 100%;
   padding: 0 10px 0 45px;
@@ -96,7 +99,7 @@ header {
 }
 .input-field:hover,
 .input-field:focus {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgb(137 126 126 / 49%);
 }
 ::-webkit-input-placeholder {
   color: #fff;
@@ -143,8 +146,42 @@ header {
   text-decoration: underline;
 }
 
+.radio-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.bt-radio {
+  color: #fff;
+  cursor: pointer;
+}
+
+.bt-radio:hover {
+  text-decoration: underline;
+}
+
+.bt-radio::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #141313;
+  margin-right: 10px;
+}
+
+input[type="radio"]:checked + .bt-radio::before {
+  background-color: #92d35e;
+}
+
 @media only screen and (max-width: 540px) {
-  .wrapper {
+  .wrapper-singup {
     min-height: 100vh;
   }
   .form-box {
@@ -160,4 +197,7 @@ header {
     flex-direction: column;
     gap: 0;
   }
+}
+.bt-radio {
+  color: #0e0e0e;
 }

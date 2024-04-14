@@ -6,6 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import "./styleLogin.css";
 import "react-toastify/dist/ReactToastify.css";
 import { errorToast } from "../../utils";
+import Navbar from "../../layouts/Navbar/Navbar";
+import Footer from "../../layouts/Footer/Footer";
 const Login = () => {
   const navigate = useNavigate();
   const { loading, isAuth, role, error } = useSelector(
@@ -49,15 +51,12 @@ const Login = () => {
 
   return (
     <>
+      <Navbar />
       <div className="wrapper">
         <div className="form-box">
           <div className="login-container" id="login">
             <div className="top">
-              <span>
-                Don't have an account?
-                <a href="#">Sign Up</a>
-              </span>
-              <header>Login</header>
+              <header>Sign In</header>
             </div>
             <div className="input-box">
               <input
@@ -78,20 +77,21 @@ const Login = () => {
             <div className="input-box">
               <input type="submit" className="submit" defaultValue="Sign In" />
             </div>
-            <div className="two-col">
-              <div className="one">
-                <input type="checkbox" id="login-check" />
-                <label htmlFor="login-check"> Remember Me</label>
-              </div>
-              <div className="two">
-                <label>
-                  <a href="#">Forgot password?</a>
-                </label>
-              </div>
+            <div className="top">
+              <span>
+                Don't have an account?
+                <a href="/signup">Sign Up</a>
+              </span>
             </div>
           </div>
         </div>
       </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <Footer />
     </>
   );
 };
