@@ -110,12 +110,17 @@ header {
   left: 17px;
   color: #fff;
 }
+.input-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
 .submit {
   font-size: 15px;
   font-weight: 500;
   color: black;
   height: 45px;
-  width: 100%;
+  width: 50%;
   border: none;
   border-radius: 30px;
   outline: none;
