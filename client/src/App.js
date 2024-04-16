@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { PublicRoute } from "./utils/PublicRoute";
 
 import { useSelector } from "react-redux";
-import Signup from "./Pages/SignUp/Signup";
+import Signup from "./Pages/Signup/Signup";
 
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
