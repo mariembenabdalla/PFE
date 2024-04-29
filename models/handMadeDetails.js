@@ -15,12 +15,11 @@ const handMadeSchema = new mongoose.Schema({
       _id: mongoose.Schema.Types.ObjectId,
       name: { type: String },
       description: { type: String },
-      images: [
+      file: [
         {
           type: String,
         },
       ],
-      videos: [{ type: String }],
     },
   ],
 });
