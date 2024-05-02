@@ -17,7 +17,7 @@ const Listuser = () => {
   //get all
   //   const getAllUsers = () => {
   //     axiosApi
-  //       .get("http://localhost:5000/users/items?items=Student")
+  //       .get("http://localhost:5000/users")
   //       .then((res) => {
   //         //console.log(res, "response users ****************")
   //         setlistusers(res.data.data);
@@ -116,6 +116,9 @@ const Listuser = () => {
   return (
     <>
       <Navbar />
+      <br />
+      <br />
+      <br />
       <div className="container-xxl p  y-5">
         <div className="container">
           <div className="text-center wow fadeInUp" data-wow-delay="0.1s">

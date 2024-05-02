@@ -1,6 +1,7 @@
 import "./App.css";
 import Login from "./Pages/Login/Login";
 import { Route, Routes } from "react-router-dom";
+
 // Navigate
 // import { PrivateRoute } from "./utils/ProtectedRoute";
 import { PublicRoute } from "./utils/PublicRoute";
@@ -10,13 +11,14 @@ import Signup from "./Pages/SignUp/Signup";
 import Listuser from "./Pages/List user/Listuser";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
-import Footer from "./layouts/Footer/Footer";
 import Listjob from "./Pages/ListJobName/ListJob";
 import Addjobname from "./Pages/Addjobnamelist/Addjobname";
 import Listproject from "./Pages/Listproject/Listproject";
 import Updateproject from "./Pages/Updateproject/Updateproject";
 import Addproject from "./Pages/Addprojet/Addprojet";
 import Profilhandmade from "./Pages/Profilhandmade/Profilhandmade";
+import Listdemandehandmade from "./Pages/Listdemandehandmade/Listdemandehandmade";
+import Listuserhandmade from "./Pages/Listuserhandmade/Listuserhandmade";
 
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
@@ -119,6 +121,23 @@ function App() {
           element={
             <PublicRoute user={user}>
               <Profilhandmade />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/Listdemandehandmade"
+          element={
+            <PublicRoute user={user}>
+              <Listdemandehandmade />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/Listuserhandmade"
+          element={
+            <PublicRoute user={user}>
+              <Listuserhandmade />
             </PublicRoute>
           }
         />

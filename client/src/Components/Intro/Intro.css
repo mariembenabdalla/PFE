@@ -43,8 +43,8 @@ textarea:focus {
   font-size: 5em;
 }
 .intro .container .intro-text h1 .looking {
-  margin-left: -90px;
   margin-bottom: -34px;
+  width: 68%;
 }
 
 h1,
@@ -179,6 +179,7 @@ h1 {
   margin-bottom: -56px;
   /* margin-top: 89px;
   margin-right: 22px; */
+  margin-left: 120px;
 }
 
 @media (min-width: 768px) {
@@ -186,7 +187,7 @@ h1 {
     font-size: 3em;
   }
   .intro {
-    width: 100vw;
+    /* width: 100vw; */
     overflow: hidden;
     height: 100vh;
   }
@@ -219,7 +220,7 @@ h1 {
     z-index: 5;
   }
   .intro .intro-text .form {
-    padding: 15px 20px 15px 40px;
+    padding: 11px 20px 11px 10px;
   }
   .intro .intro-text .form div {
     display: inline-block;

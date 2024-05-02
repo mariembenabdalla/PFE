@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* Réduction de la hauteur pour s'adapter à l'écran */
-  /* background-color: rgba(120, 122, 126, 0.63); */
+  background-color: white;
   /* background-image: url(https://www.shutterstock.com/image-illustration/abstract-noise-dotwork-pattern-gradient-600nw-2268767837.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
@@ -103,18 +103,46 @@ header {
 ::-webkit-input-placeholder {
   color: #fff;
 }
+.input-box {
+  position: relative; /* Ajoutez cette propriété pour rendre les icônes positionnées par rapport à ce conteneur */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.input-field {
+  font-size: 15px;
+  background: rgb(91 83 83 / 54%);
+  color: #161515;
+  height: 50px;
+  width: 100%;
+  padding: 0 10px 0 45px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  transition: 0.2s ease;
+  position: relative; /* Ajoutez cette propriété */
+}
+
 .input-box i {
-  position: relative;
-  top: -35px;
-  left: 17px;
-  color: #fff;
+  position: absolute; /* Ajoutez cette propriété pour positionner l'icône */
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px; /* Ajustez cette valeur selon votre besoin */
+  color: #ffffff;
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
 }
 .submit {
   font-size: 15px;
   font-weight: 500;
   color: black;
   height: 45px;
-  width: 100%;
+  width: 50%;
   border: none;
   border-radius: 30px;
   outline: none;
@@ -171,7 +199,7 @@ input[type="radio"] {
   height: 20px;
   border-radius: 50%;
   background-color: transparent;
-  border: 2px solid #141313;
+  border: 2px solid#a29fa0;
   margin-right: 10px;
 }
 
@@ -198,5 +226,5 @@ input[type="radio"]:checked + .bt-radio::before {
   }
 }
 .bt-radio {
-  color: #0e0e0e;
+  color: #a29fa0;
 }
